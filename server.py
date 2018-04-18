@@ -24,5 +24,20 @@ def home():
 def data():
     return send_from_directory(".","data.csv")
 
+@app.route("/data60")
+def data60():
+    f = open("data.csv","r")
+    lines = f.readlines()
+    res = "x"
+    print(len(lines))
+    if len(lines) < 60:
+       res = lines[1:len(lines)]
+    else:
+       res = lines[len(lines)-59:len(lines)]
+    content = ""
+    for i in res:
+        content = content + i
+    return content
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=31919)
